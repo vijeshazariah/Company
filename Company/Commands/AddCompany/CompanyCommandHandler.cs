@@ -1,4 +1,5 @@
 ﻿using Company.Interface;
+using Company.Middleware;
 using MediatR;
 using Comp = Company.Model.Company;
 namespace Company.Commands.AddCompany
@@ -17,12 +18,14 @@ namespace Company.Commands.AddCompany
             var company = new Comp
             {
                 Name = request.Name,
-                StockTicker = request.StockTicker,
+                Ticker = request.Ticker,
                 Exchange = request.Exchange,
                 Isin = request.Isin,
                 WebsiteUrl = request.WebsiteUrl
             };
-            return await _companyRepository.CreateCompanyAsync(company);
+            if (_companyRepository.ValidateIsin(company.Isin))
+                return await _companyRepository.CreateCompanyAsync(company);
+            else throw new BusinessValidationException($"A company with ISIN {company.Isin} already exists.");
         }
     }
 }

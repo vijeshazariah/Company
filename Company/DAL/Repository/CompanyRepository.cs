@@ -14,13 +14,26 @@ namespace Company.DAL.Repository
         {
             _connectionString = configuration.GetConnectionString("DapperCompanyDb");
         }
+        public bool ValidateIsin(string isin)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                // Call stored procedure and capture result synchronously
+                var result = connection.QueryFirstOrDefault<bool>(
+                    "sp_ValidateIsin",
+                    new { Isin = isin },
+                    commandType: CommandType.StoredProcedure
+                );
+                return result;
+              }
+            }
         public async Task<int> CreateCompanyAsync(CompanyModel company)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("Name", company.Name);
-                parameters.Add("StockTicker", company.StockTicker);
+                parameters.Add("Ticker", company.Ticker);
                 parameters.Add("Exchange", company.Exchange);
                 parameters.Add("Isin", company.Isin);
                 parameters.Add("WebsiteUrl", company.WebsiteUrl);
@@ -35,7 +48,7 @@ namespace Company.DAL.Repository
                 var parameters = new DynamicParameters();
                 parameters.Add("@Id", company.Id);
                 parameters.Add("Name", company.Name);
-                parameters.Add("StockTicker", company.StockTicker);
+                parameters.Add("Ticker", company.Ticker);
                 parameters.Add("Exchange", company.Exchange);
                 parameters.Add("Isin", company.Isin);
                 parameters.Add("WebsiteUrl", company.WebsiteUrl);

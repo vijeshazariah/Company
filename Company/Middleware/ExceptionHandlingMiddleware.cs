@@ -1,4 +1,5 @@
-﻿using CorrelationId;
+﻿using Company.Middleware;
+using CorrelationId;
 using System.Net;
 
 public class ExceptionHandlingMiddleware
@@ -36,11 +37,30 @@ public class ExceptionHandlingMiddleware
                 await _next(context);  // Continue processing the request
             }
         }
+        catch (BusinessValidationException ex)
+        {
+            _logger.LogError(ex, "Business validation error");
+            await HandleBusinessValidationExceptionAsync(context, ex);
+        }
         catch (Exception ex)
         {
             // Catch the exception and handle it
             await HandleExceptionAsync(context, ex);
         }
+    }
+    private Task HandleBusinessValidationExceptionAsync(HttpContext context, BusinessValidationException ex)
+    {
+        context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+        context.Response.ContentType = "application/json";
+
+        var errorResponse = new
+        {
+            StatusCode = context.Response.StatusCode,
+            Message = ex.Message,
+        };
+
+        // Return error response in JSON format
+         return context.Response.WriteAsJsonAsync(errorResponse);
     }
 
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)

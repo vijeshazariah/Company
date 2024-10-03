@@ -24,7 +24,7 @@ namespace CompanyApi.Tests.HandlerTests
             {
                 Id = 1,
                 Name = "Apple Inc.",
-                StockTicker = "AAPL",
+                Ticker = "AAPL",
                 Exchange = "NASDAQ",
                 Isin = "US0378331005",
                 WebsiteUrl = "http://www.apple.com"
@@ -42,7 +42,7 @@ namespace CompanyApi.Tests.HandlerTests
             result.Should().NotBeNull();
             result.Id.Should().Be(1);
             result.Name.Should().Be("Apple Inc.");
-            result.StockTicker.Should().Be("AAPL");
+            result.Ticker.Should().Be("AAPL");
             result.Isin.Should().Be("US0378331005");
         }
 

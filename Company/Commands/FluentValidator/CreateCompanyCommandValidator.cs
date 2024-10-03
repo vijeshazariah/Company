@@ -11,7 +11,7 @@ namespace Company.Commands.FluentValidator
                 .NotEmpty().WithMessage("Company name is required.")
                 .MaximumLength(255).WithMessage("Company name must not exceed 255 characters.");
 
-            RuleFor(c => c.StockTicker)
+            RuleFor(c => c.Ticker)
                 .NotEmpty().WithMessage("Stock Ticker is required.")
                 .MaximumLength(10).WithMessage("Stock Ticker must not exceed 10 characters.");
 
