@@ -22,8 +22,8 @@ namespace CompanyApi.Tests.HandlerTests
             // Arrange
             var companies = new List<companyModel>
         {
-            new companyModel { Id = 1, Name = "Apple", StockTicker = "AAPL", Isin = "US0378331005", Exchange = "NASDAQ" },
-            new companyModel { Id = 2, Name = "Heineken", StockTicker = "HEIA", Isin = "NL0000009165", Exchange = "Euronext Amsterdam" }
+            new companyModel { Id = 1, Name = "Apple", Ticker = "AAPL", Isin = "US0378331005", Exchange = "NASDAQ" },
+            new companyModel { Id = 2, Name = "Heineken", Ticker = "HEIA", Isin = "NL0000009165", Exchange = "Euronext Amsterdam" }
         };
 
             _companyRepositoryMock.Setup(repo => repo.GetAllCompanies())

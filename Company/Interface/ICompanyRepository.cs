@@ -8,5 +8,6 @@ namespace Company.Interface
         Task<CompanyModel> GetByIsin(string isIN);
         Task<List<CompanyModel>> GetAllCompanies();
         Task UpdateCompanyAsync(CompanyModel existingCompany);
+        bool ValidateIsin(string isiN);
     }
 }

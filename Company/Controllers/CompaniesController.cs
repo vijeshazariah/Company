@@ -46,7 +46,7 @@ namespace Company.Controllers
             {
                 Id = company.Id,
                 Name = company.Name,
-                StockTicker = company.StockTicker,
+                Ticker = company.Ticker,
                 Exchange = company.Exchange,
                 Isin = company.Isin,
                 WebsiteUrl = company.WebsiteUrl

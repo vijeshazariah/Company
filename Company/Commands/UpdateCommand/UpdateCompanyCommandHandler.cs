@@ -1,7 +1,9 @@
 ﻿using Company.Interface;
+using Company.Middleware;
 using Company.Model;
 using Company.Queries.GetCompanyById;
 using MediatR;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Company.Commands.UpdateCommand
 {
@@ -34,14 +36,19 @@ namespace Company.Commands.UpdateCommand
             {
                 Id = request.Id,
                 Name = request.Name,
-                StockTicker = request.StockTicker,
+                Ticker = request.Ticker,
                 Exchange = request.Exchange,
                 Isin = request.Isin,
                 WebsiteUrl = request.WebsiteUrl 
             };
 
-            // Update the company in the database
-            await  _companyRepository.UpdateCompanyAsync(companyDataToUpdate);
+            // Update the company in the database but check if same IsIn is already available
+            if (_companyRepository.ValidateIsin(companyDataToUpdate.Isin))
+            {
+                await _companyRepository.UpdateCompanyAsync(companyDataToUpdate);
+                _logger.LogInformation("Successfully updated company with ID: {CompanyId}", request.Id);
+            }
+            else throw new BusinessValidationException($"A company with ISIN {companyDataToUpdate.Isin} already exists.");
 
             _logger.LogInformation("Successfully updated company with ID: {CompanyId}", request.Id);
             return true;

@@ -20,7 +20,7 @@ namespace Company.Queries.GetAllCompanies
             {
                 Id = c.Id,
                 Name = c.Name,
-                StockTicker = c.StockTicker,
+                Ticker = c.Ticker,
                 Exchange = c.Exchange,
                 Isin = c.Isin,
                 WebsiteUrl = c.WebsiteUrl
