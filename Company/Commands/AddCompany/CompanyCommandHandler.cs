@@ -23,6 +23,7 @@ namespace Company.Commands.AddCompany
                 Isin = request.Isin,
                 WebsiteUrl = request.WebsiteUrl
             };
+            // Check for Duplicate Isin if already exist in DB only then create Company
             if (_companyRepository.ValidateIsin(company.Isin))
                 return await _companyRepository.CreateCompanyAsync(company);
             else throw new BusinessValidationException($"A company with ISIN {company.Isin} already exists.");

@@ -54,7 +54,6 @@ namespace Company.DAL.Repository
                 parameters.Add("WebsiteUrl", company.WebsiteUrl);
                 await connection.ExecuteAsync("sp_UpdateCompany", parameters, commandType: CommandType.StoredProcedure);
             }
-
         }
         public async Task<CompanyModel> GetCompanyByIdAsync(int id)
         {

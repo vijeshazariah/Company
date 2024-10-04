@@ -74,13 +74,16 @@ namespace Company.Controllers
         [HttpGet("CompanyID/{id}")]
         public async Task<IActionResult> GetCompanyById(int id)
         {
+
             var company = await _mediator.Send(new GetCompanyByIdQuery { Id = id });
+            _logger.LogInformation("Response From GetCompanyByID", JsonSerializer.Serialize(company));
             return company != null ? Ok(company) : NotFound();
         }
         [HttpGet("CompanyByInIs/{InIs}")]
         public async Task<IActionResult> GetCompanyByISIN(string InIs)
         {
             var company = await _mediator.Send(new GetCompanyByIsinQuery { InIs = InIs });
+            _logger.LogInformation("Response From GetCompanyByISIN", JsonSerializer.Serialize(company));
             return company != null ? Ok(company) : NotFound();
         }
 
