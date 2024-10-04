@@ -42,14 +42,8 @@ namespace Company.Commands.UpdateCommand
                 WebsiteUrl = request.WebsiteUrl 
             };
 
-            // Update the company in the database but check if same IsIn is already available
-            if (_companyRepository.ValidateIsin(companyDataToUpdate.Isin))
-            {
+            // Update the company in the database 
                 await _companyRepository.UpdateCompanyAsync(companyDataToUpdate);
-                _logger.LogInformation("Successfully updated company with ID: {CompanyId}", request.Id);
-            }
-            else throw new BusinessValidationException($"A company with ISIN {companyDataToUpdate.Isin} already exists.");
-
             _logger.LogInformation("Successfully updated company with ID: {CompanyId}", request.Id);
             return true;
         }

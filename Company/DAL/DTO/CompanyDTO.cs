@@ -8,6 +8,6 @@ namespace Company.DAL.DTO
         public string Ticker { get; set; }
         public string Exchange { get; set; }
         public string Isin { get; set; }
-        public string WebsiteUrl { get; set; }
+        public string? WebsiteUrl { get; set; }
     }
 }
