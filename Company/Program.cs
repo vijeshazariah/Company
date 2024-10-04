@@ -1,16 +1,14 @@
 using Company.Commands.FluentValidator;
 using Company.DAL.Repository;
 using Company.Interface;
+using Company.Model;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Company.Model;
-using Microsoft.Extensions.Options;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
