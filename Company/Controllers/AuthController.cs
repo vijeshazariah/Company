@@ -18,11 +18,11 @@ namespace Company.Controllers
         {
             _jwtSettings = jwtSettings.Value;
         }
-        [HttpPost("login")]
-        public IActionResult Login([FromBody] UserLogin userLogin)
+        [HttpPost("GetToken")]
+        public IActionResult GetToken([FromBody] UserLogin userLogin)
         {
             // Validate user credentials (This is an example, normally you'd check against a database)
-            if (userLogin.Username == "testuser" && userLogin.Password == "password")
+            if (userLogin.Username == "apiUser" && userLogin.Password == "apiUser")
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);

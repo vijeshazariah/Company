@@ -24,7 +24,6 @@ namespace Company.Commands.FluentValidator
                 .Length(12).WithMessage("ISIN must be exactly 12 characters.")
                 .Matches(@"^[A-Za-z]{2}\w{10}$").WithMessage("ISIN must start with two letters followed by 10 alphanumeric characters.");
 
-            
         }
     }
 }

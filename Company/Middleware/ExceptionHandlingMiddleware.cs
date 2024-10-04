@@ -8,6 +8,7 @@ public class ExceptionHandlingMiddleware
     private const string CorrelationIdHeader = "X-Correlation-ID";
     private readonly RequestDelegate _next;
     private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+
  
 
     public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
